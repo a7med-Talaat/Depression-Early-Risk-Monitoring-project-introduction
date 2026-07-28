@@ -63,16 +63,8 @@ function initAIoTApp() {
     langArBtn.onclick = function() { setLanguage('ar'); };
   }
 
-  // Apply saved language preference
+  // Apply saved language preference — all translations embedded inline, no fetch needed
   setLanguage(currentLang);
-
-  // Attempt fetch translations.json for external deployment fallback
-  fetch('translations.json').then(r => r.json()).then(data => {
-    if (data && data.ar) {
-      Object.assign(translations, data.ar);
-      if (currentLang === 'ar') setLanguage('ar');
-    }
-  }).catch(() => {});
 
   // Mobile sidebar toggle
   const sidebar = document.getElementById('sidebar');
