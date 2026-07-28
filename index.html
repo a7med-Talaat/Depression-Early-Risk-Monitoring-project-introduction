@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIoT-Based Depression Early Risk Monitoring System</title>
+<meta name="description" content="An intelligent system that aims to early detect the risk of depression by integrating AI and IoT technologies.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0C1512">
+<meta property="og:title" content="AIoT-Based Depression Early Risk Monitoring System">
+<meta property="og:description" content="Wearable sensors + AI for early depression-risk screening.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230C1512'/%3E%3Cpath d='M4 18h4l2.5-8 4 16 3-11 2 5h8.5' stroke='%2372E8C6' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="backdrop" id="backdrop"></div>
+<button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+
+<div class="shell">
+
+  <nav class="sidebar" id="sidebar" aria-label="Section navigation">
+    <div class="brand" data-i18n="brand_title">AIoT Depression Early Risk</div>
+    <div style="font-size: 11px; color: var(--teal);" data-i18n="brand_sub">// Monitoring System</div>
+    
+    <!-- Language Toggle Switch (EN / AR) -->
+    <div class="lang-switch-wrap">
+      <span class="lang-switch-label">Language:</span>
+      <div class="lang-toggle-btn">
+        <span class="lang-btn-opt active" id="langBtnEn">EN</span>
+        <span class="lang-btn-opt" id="langBtnAr">AR</span>
+      </div>
+    </div>
+    <ul class="toc">
+      <li><a href="#overview"><span class="idx">00</span><span data-i18n="nav_00">Overview</span></a></li>
+      <li><a href="#rationale"><span class="idx">01</span><span data-i18n="nav_01">Why Needed</span></a></li>
+      <li><a href="#architecture"><span class="idx">02</span><span data-i18n="nav_02">System Architecture</span></a></li>
+      <li><a href="#hardware"><span class="idx">03</span><span data-i18n="nav_03">Hardware &amp; 3D Models</span></a></li>
+      <li><a href="#stack"><span class="idx">04</span><span data-i18n="nav_04">Technology Stack</span></a></li>
+      <li><a href="#aiml"><span class="idx">05</span><span data-i18n="nav_05">AI / ML Pipeline</span></a></li>
+      <li><a href="#apps"><span class="idx">06</span><span data-i18n="nav_06">Dashboard &amp; App</span></a></li>
+      <li><a href="#features"><span class="idx">07</span><span data-i18n="nav_07">Features</span></a></li>
+      <li><a href="#ethics"><span class="idx">08</span><span data-i18n="nav_08">Challenges</span></a></li>
+      <li><a href="#roadmap"><span class="idx">09</span><span data-i18n="nav_09">Roadmap</span></a></li>
+      <li><a href="#references"><span class="idx">10</span><span data-i18n="nav_10">References</span></a></li>
+    </ul>
+
+    <!-- Bottom-Left Production Tasks Forward Button -->
+    <div style="padding: 16px 0 8px 0; border-top: 1px solid var(--hair-2); margin-top: 14px;">
+      <a href="production_tasks.html" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px 14px; background: var(--panel-2); color: var(--teal); border: 1px solid var(--teal-dim); border-radius: 6px; font-weight: 700; font-family: var(--font-b); font-size: 13px; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: all 0.2s ease;">
+        ⚡ Production Tasks ↗
+      </a>
+    </div>
+
+    <div class="sidebar-foot">
+      Screening &amp; monitoring tool.<br>
+      Not a diagnostic device.<br>
+      v2.0 — Enhanced — 2026
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="top">
+      <div class="wrap">
+        <div class="hero-kicker" data-i18n="hero_kicker">AIoT · Smart Sensors · Early Mental-Health Support</div>
+        <h1 data-i18n="hero_title">AIoT-Based Depression Early Risk Monitoring System</h1>
+        <p class="hero-lede" data-i18n="hero_lede">This intelligent system aims to early detect the risk of depression by integrating AI and IoT (AIoT) technologies. The system collects biological and behavioral data from the user through wearable sensing devices and a mobile app, such as heart rate, sleep quality, activity level, and usage patterns. This data is sent securely to a cloud platform where it is analyzed using AI algorithms to determine the risk level of depression. If a high-risk level is detected, the system provides immediate notifications and personalized recommendations to guide the user to a specialist if needed, to improve mental health and quality of life.</p>
+        <div class="hero-meta">
+          <div class="m"><b>Sensors</b>Heart Rate, SpO2, Motion</div>
+          <div class="m"><b>Real-Time</b>Wi-Fi & Cloud Sync</div>
+          <div class="m"><b>AI Analysis</b>Precise ML Prediction</div>
+          <div class="m"><b>Alerts</b>Instant Notifications</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 00 OVERVIEW ================= -->
+    <section id="overview">
+      <div class="wrap">
+        <div class="eyebrow"><span class="n">00</span>Overview</div>
+        <h2 data-i18n="h2_00">Project Objectives &amp; Features</h2>
+        
+        <h3 data-i18n="h3_obj">Project Objectives</h3>
+        <div class="grid grid-3" style="margin-top:20px; margin-bottom: 40px;">
+          <div class="card">
+            <h4 data-i18n="obj_1_t">1. Continuous Health Data Monitoring</h4>
+            <p data-i18n="obj_1_d">Collecting biological and behavioral indicators continuously using smart sensors and devices.</p>
+          </div>
+          <div class="card">
+            <h4 data-i18n="obj_2_t">2. Early Detection of Depression Risk</h4>
+            <p data-i18n="obj_2_d">Analyzing data using AI to identify patterns indicating early stages of depression.</p>
+          </div>
+          <div class="card">
+            <h4 data-i18n="obj_3_t">3. Alert When Risk Exists</h4>
+            <p data-i18n="obj_3_d">Sending instant notifications to the user or guardian when abnormal indicators are discovered.</p>
+          </div>
+          <div class="card">
+            <h4>4. Data Display & Reports</h4>
+            <p data-i18n="obj_4_d">Providing a dashboard and app to display data, results and reports clearly.</p>
+          </div>
+          <div class="card">
+            <h4 data-i18n="obj_5_t">5. Secure Data Storage</h4>
+            <p data-i18n="obj_5_d">Storing data in a secure database while preserving user privacy and information confidentiality.</p>
+          </div>
+          <div class="card">
+            <h4 data-i18n="obj_6_t">6. Supporting Specialists in Decision Making</h4>
+            <p data-i18n="obj_6_d">Providing reports and analyses to help doctors and specialists follow up on cases and intervene early.</p>
+          </div>
+          <div class="card">
+            <h4 data-i18n="obj_7_t">7. Improving Quality of Life</h4>
+            <p data-i18n="obj_7_d">Contributing to improving mental health and quality of life through follow-up and continuous support.</p>
+          </div>
+        </div>
+
+        <h3 data-i18n="h3_feat">Project Features</h3>
+        <div class="grid grid-3" style="margin-top:20px; margin-bottom: 20px;">
+          <div class="card">
+            <h4>1. Comprehensive & Multi-Indicator Monitoring</h4>
+            <p data-i18n="feat_1_d">Measures indicators like heart rate, sleep quality, activity level, stress levels and others for accurate assessment.</p>
+          </div>
+          <div class="card">
+            <h4 data-i18n="feat_2_t">2. Smart AI Analysis</h4>
+            <p data-i18n="feat_2_d">Uses machine learning algorithms to analyze data and predict depression risk with high accuracy.</p>
+          </div>
+          <div class="card">
+            <h4 data-i18n="feat_3_t">3. Real-Time System</h4>
+            <p data-i18n="feat_3_d">Collects data, analyzes it and displays results in real time to ensure rapid intervention.</p>
+          </div>
+          <div class="card">
+            <h4>4. Smart Dashboard & Application</h4>
+            <p data-i18n="feat_4_d">Easy-to-use interface displaying charts, reports, alerts and status tracking from anywhere.</p>
+          </div>
+          <div class="card">
+            <h4>5. Wireless & Cloud Storage Connection</h4>
+            <p data-i18n="feat_5_d">Sends data via Wi-Fi and stores in cloud for secure access from any device.</p>
+          </div>
+          <div class="card">
+            <h4>6. Scalable & Customizable</h4>
+            <p data-i18n="feat_6_d">Flexible design that allows adding new sensors, improving algorithms, and developing the platform easily.</p>
+          </div>
+        </div>
+        
+        <div class="card" style="border-color:var(--teal-dim); background:rgba(114,232,198,0.04);">
+          <p style="font-size:15px; margin:0; text-align: center; color: var(--teal);"><strong data-i18n="goal_banner">Our goal is to provide a smart and secure system that helps in early detection of depression risk, to support better health and a more stable life.</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 01 RATIONALE ================= -->
+    <section id="rationale">
+      <div class="wrap">
+        <div class="eyebrow"><span class="n">01</span><span data-i18n="eyebrow_01">Why Needed</span></div>
+        <h2 data-i18n="h2_01">The problem today, and what changed</h2>
+        <div class="lead-block">
+          <p data-i18n="rationale_p1">Depression is typically identified through infrequent clinical visits and questionnaires, often missing the subtle, day-to-day physiological and behavioral shifts that precede a severe episode. However, modern research shows that continuous monitoring of biological indicators—such as heart rate, sleep quality, and physical activity—can accurately reveal these early signs before individuals themselves recognize them.</p>
+          <p data-i18n="rationale_p2">By integrating IoT smart sensors and Machine Learning algorithms, this system creates an early warning mechanism. It continuously monitors the user's data, identifies high-risk patterns, and provides prompt alerts and recommendations, allowing for timely intervention rather than waiting for a delayed clinical diagnosis.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 02 ARCHITECTURE ================= -->
+    <section id="architecture">
+      <div class="wrap">
+        <div class="eyebrow"><span class="n">02</span><span data-i18n="eyebrow_02">System Architecture</span></div>
+        <h2 data-i18n="h2_02">6-Stage Software Architecture</h2>
+        <p class="lead-block" data-i18n="arch_p">Data flows seamlessly from the user to the cloud and back as actionable insights.</p>
+
+        <div class="arch">
+          <div class="arch-layer">
+            <div class="arch-num">01</div>
+            <div class="arch-body">
+              <h3 data-i18n="arch_1_t">Data Collection</h3>
+              <p data-i18n="arch_1_d">Read sensor data (heart rate, oxygen, activity, sleep) locally from the user.</p>
+            </div>
+          </div>
+          <div class="arch-flow">↓</div>
+          <div class="arch-layer">
+            <div class="arch-num">02</div>
+            <div class="arch-body">
+              <h3 data-i18n="arch_2_t">Data Transmission</h3>
+              <p data-i18n="arch_2_d">Send data from the ESP32 controller via Wi-Fi using MQTT/HTTP protocol.</p>
+            </div>
+          </div>
+          <div class="arch-flow">↓</div>
+          <div class="arch-layer">
+            <div class="arch-num">03</div>
+            <div class="arch-body">
+              <h3 data-i18n="arch_3_t">Data Processing</h3>
+              <p data-i18n="arch_3_d">Receive, clean and prepare the raw data for analysis.</p>
+            </div>
+          </div>
+          <div class="arch-flow">↓</div>
+          <div class="arch-layer">
+            <div class="arch-num">04</div>
+            <div class="arch-body">
+              <h3 data-i18n="arch_4_t">Database</h3>
+              <p data-i18n="arch_4_d">Store data securely and organized in a Firebase/MySQL database.</p>
+            </div>
+          </div>
+          <div class="arch-flow">↓</div>
+          <div class="arch-layer">
+            <div class="arch-num">05</div>
+            <div class="arch-body">
+              <h3 data-i18n="arch_5_t">AI Analysis</h3>
+              <p data-i18n="arch_5_d">Analyze data using machine learning models to determine the depression risk level.</p>
+            </div>
+          </div>
+          <div class="arch-flow">↓</div>
+          <div class="arch-layer">
+            <div class="arch-num">06</div>
+            <div class="arch-body">
+              <h3>Display & Notifications</h3>
+              <p data-i18n="arch_6_d">Display results on the dashboard and app, and send instant notifications when needed.</p>
+            </div>
+          </div>
+        </div>
+         <!-- ================= 03 HARDWARE ================= -->
+    <section id="hardware">
+      <div class="wrap">
+        <div class="eyebrow"><span class="n">03</span><span data-i18n="eyebrow_03">Hardware &amp; 3D Models</span></div>
+        <h2 data-i18n="h2_03">The physical components &amp; wearable device</h2>
+        <p class="lead-block" data-i18n="hw_lead">Explore both the prototype component layout and the fully assembled AIoT wearable smartband in 3D below.</p>
+
+        <!-- FIRST: Component Layout (Breadboard Prototype) -->
+        <div style="margin-top: 32px; margin-bottom: 40px;">
+          <div class="model-label" style="font-size: 13px; margin-bottom: 12px;" data-i18n="l_comp">🔌 Component Layout — Breadboard Prototype</div>
+          <div class="model-shell">
+            <div class="model-top">
+              <div class="model-hint">🖱 Drag to rotate · Scroll to zoom · Tap a part below</div>
+              <button class="model-reset" id="modelReset">Reset view</button>
+            </div>
+            <div class="model-body">
+              <div class="model-canvas-wrap" id="modelCanvasWrap">
+                <span class="loading-tag" id="modelLoadingTag">loading model…</span>
+              </div>
+              <div class="model-side">
+                <div id="partList"></div>
+                <div class="info-panel" id="infoPanel">
+                  <b>Tap a part</b>
+                  Select any piece on the model or in this list to see what it does.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECOND: Wearable Device (AIoT Smartband) -->
+        <div style="margin-top: 40px; margin-bottom: 40px;">
+          <div class="model-label" style="font-size: 13px; margin-bottom: 12px;" data-i18n="l_wear">⌚ Wearable Device — AIoT Smartband</div>
+          <div class="model-shell">
+            <div class="model-top">
+              <div class="model-hint">🖱 Drag to rotate · Scroll to zoom · Tap a component</div>
+              <button class="model-reset" id="wearableModelReset">Reset view</button>
+            </div>
+            <div class="model-body">
+              <div class="model-canvas-wrap" id="wearableCanvasWrap">
+                <span class="loading-tag" id="wearableLoadingTag">loading model…</span>
+              </div>
+              <div class="model-side">
+                <div id="wearablePartList"></div>
+                <div class="info-panel" id="wearableInfoPanel">
+                  <b>Tap a component</b>
+                  Select any part on the wearable model or in this list to learn what it does.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hardware Component Cards -->
+        <div class="grid grid-3" style="margin-top:28px;">
+          <div class="hw-comp-card">
+            <div class="hw-comp-num">①</div>
+            <div>
+              <h4>ESP32</h4>
+              <p data-i18n="c1_d">Main controller — reads all sensor data, processes it, and sends it to the cloud via Wi-Fi &amp; Bluetooth.</p>
+              <div class="tag-row" style="margin-top:8px;"><span class="pill">Wi-Fi</span><span class="pill">Bluetooth</span><span class="pill">Dual-Core</span></div>
+            </div>
+          </div>
+          <div class="hw-comp-card">
+            <div class="hw-comp-num" style="color:#CC2200;">②</div>
+            <div>
+              <h4>MAX30102</h4>
+              <p data-i18n="c2_d">Optical sensor for heart rate (BPM) and blood oxygen (SpO₂) using red &amp; infrared light through the wrist skin.</p>
+              <div class="tag-row" style="margin-top:8px;"><span class="pill">Heart Rate</span><span class="pill">SpO₂</span></div>
+            </div>
+          </div>
+          <div class="hw-comp-card">
+            <div class="hw-comp-num" style="color:#4499ff;">③</div>
+            <div>
+              <h4>MPU6050</h4>
+              <p data-i18n="c3_d">6-DOF accelerometer + gyroscope. Tracks wrist movement, step count, activity level, and sleep quality.</p>
+              <div class="tag-row" style="margin-top:8px;"><span class="pill">Activity</span><span class="pill">Steps</span></div>
+            </div>
+          </div>
+          <div class="hw-comp-card">
+            <div class="hw-comp-num" style="color:#E0AA6C;">④</div>
+            <div>
+              <h4>DHT22</h4>
+              <p data-i18n="c4_d">Measures ambient temperature and humidity. Environmental context improves AI depression risk accuracy.</p>
+              <div class="tag-row" style="margin-top:8px;"><span class="pill">Temperature</span><span class="pill">Humidity</span></div>
+            </div>
+          </div>
+          <div class="hw-comp-card">
+            <div class="hw-comp-num" style="color:#72E8C6;">⑤</div>
+            <div>
+              <h4>OLED Display</h4>
+              <p data-i18n="c5_d">Small screen showing real-time wrist metrics: heart rate (78 BPM), SpO₂ (98%), and connection status.</p>
+              <div class="tag-row" style="margin-top:8px;"><span class="pill">78 BPM</span><span class="pill">SpO₂ 98%</span></div>
+            </div>
+          </div>
+          <div class="hw-comp-card">
+            <div class="hw-comp-num" style="color:#9979DD;">⑥</div>
+            <div>
+              <h4>Battery 3.7V + Charger</h4>
+              <p data-i18n="c6_d">Rechargeable 3.7V LiPo battery powering all components. USB charging module for easy recharging.</p>
+              <div class="tag-row" style="margin-top:8px;"><span class="pill">3.7V LiPo</span><span class="pill">USB Charge</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:20px;">
+          <h3 style="margin-bottom:10px;" data-i18n="hw_wiring_t">Hardware Wiring (I²C Bus)</h3>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:13px;">
+            <div><strong>MAX30102 → ESP32:</strong><br><span style="color:#9FB3AB;">VIN · SCL · SDA · INT · GND</span></div>
+            <div><strong>MPU6050 → ESP32:</strong><br><span style="color:#9FB3AB;">VCC · SCL · SDA · XDA · XCL · GND</span></div>
+            <div><strong>DHT22 → ESP32:</strong><br><span style="color:#9FB3AB;">VCC · DATA · GND</span></div>
+            <div><strong>OLED → ESP32:</strong><br><span style="color:#9FB3AB;">VCC · SCL · SDA · GND</span></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= 04 TECH STACK ================= -->
+    <section id="stack">
+      <div class="wrap">
+        <div class="eyebrow"><span class="n">04</span><span data-i18n="eyebrow_04">Technology Stack</span></div>
+        <h2 data-i18n="h2_04">Full Technical Architecture Stack</h2>
+        <p class="lead-block" data-i18n="stack_lead">The software ecosystem relies on a robust combination of web technologies, Python-based ML, and reliable cloud storage to function securely in real-time.</p>
+
+        <div class="grid grid-2" style="margin-top:32px;">
+          <div class="stack-col">
+            <h3>Frontend & UI</h3>
+            <div class="stack-item">
+              <b>HTML5, CSS3, JavaScript, React.js</b>
+              <span>UI design, data display, and user interaction. Provides a smart, responsive dashboard.</span>
+            </div>
+            <h3>Backend & API</h3>
+            <div class="stack-item">
+              <b>Python, Flask, REST API</b>
+              <span>Building APIs, receiving data from ESP32, data processing, and sending notifications.</span>
+            </div>
+            <h3 data-i18n="arch_4_t">Database</h3>
+            <div class="stack-item">
+              <b>Firebase (Realtime Database) or MySQL</b>
+              <span>Storing user data and health metrics securely, with easy and fast retrieval.</span>
+            </div>
+          </div>
+
+          <div class="stack-col">
+            <h3>AI / ML Pipeline</h3>
+            <div class="stack-item">
+              <b>Python, scikit-learn, Pandas</b>
+              <span>Data analysis, model training (Logistic Regression, Random Forest, SVM), and predicting depression risk levels.</span>
+            </div>
+            <h3>Development Tools</h3>
+            <div class="stack-item">
+              <b>Helper Tools & Environment</b>
+              <span>VS Code, Git & GitHub, Postman, MQTT Explorer, Docker (optional), Figma.</span>
+            </div>
+            <h3>Programming Languages</h3>
+            <div class="stack-item">
+              <b>Primary Languages</b>
+              <span><strong>Python</strong> (backend/AI), <strong>JavaScript</strong> (frontend logic), <strong>HTML/CSS</strong> (structure and design).</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 05 AI/ML ================= -->
+    <section id="aiml">
+      <div class="wrap">
+        <div class="eyebrow"><span class="n">05</span><span data-i18n="eyebrow_05">AI / ML Pipeline</span></div>
+        <h2 data-i18n="h2_05">Software Workflow Flowchart</h2>
+
+        <div class="pipeline">
+          <div class="pstep">
+            <div class="plabel">Step 1</div>
+            <div>
+              <h3>System Start & Read Sensor Data</h3>
+              <p data-i18n="pipe_1_d">ESP32 collects real-time metrics (Heart Rate, SpO2, Motion) locally.</p>
+            </div>
+          </div>
+          <div class="pstep">
+            <div class="plabel">Step 2</div>
+            <div>
+              <h3 data-i18n="pipe_2_t">Send Data to Server</h3>
+              <p data-i18n="pipe_2_d">Data is continuously transmitted via Wi-Fi to the database.</p>
+            </div>
+          </div>
+          <div class="pstep">
+            <div class="plabel">Step 3</div>
+            <div>
+              <h3>Process & Prepare Data</h3>
+              <p data-i18n="pipe_3_d">The backend server processes and cleans the raw data for the ML models.</p>
+            </div>
+          </div>
+          <div class="pstep">
+            <div class="plabel">Step 4</div>
+            <div>
+              <h3 data-i18n="arch_5_t">AI Analysis</h3>
+              <p data-i18n="pipe_4_d">Machine Learning algorithms (Logistic Regression, Random Forest, SVM) analyze data to assess depression risk.</p>
+            </div>
+          </div>
+          <div class="pstep">
+            <div class="plabel">Step 5</div>
+            <div>
+              <h3 data-i18n="pipe_5_t">Is Risk High?</h3>
+              <p data-i18n="pipe_5_d"><strong>Yes:</strong> Show results on dashboard + Send Alert.<br><strong>No:</strong> Show results on dashboard.</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin-top:52px;" data-i18n="score_t">What the score looks like</h3>
+        <div class="gauge-wrap">
+          <svg width="220" height="140" viewBox="0 0 220 140">
+            <path d="M20,120 A90,90 0 0,1 200,120" fill="none" stroke="#1B2E28" stroke-width="16" stroke-linecap="round"/>
+            <path d="M20,120 A90,90 0 0,1 200,120" fill="none" stroke="url(#gaugeGrad)" stroke-width="16" stroke-linecap="round" stroke-dasharray="220" stroke-dashoffset="70"/>
+            <defs>
+              <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#72E8C6"/>
+                <stop offset="55%" stop-color="#E0AA6C"/>
+                <stop offset="100%" stop-color="#E28B7A"/>
+              </linearGradient>
+            </defs>
+            <text x="110" y="105" text-anchor="middle" font-family="IBM Plex Mono" font-size="26" fill="#EEF1EC" font-weight="600">42%</text>
+            <text x="110" y="124" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#9FB3AB">RISK LEVEL</text>
+          </svg>
+          <div class="gauge-labels">
+            <div class="row"><span class="swatch" style="background:#72E8C6;"></span>Low Risk · All normal, keep watching quietly</div>
+            <div class="row"><span class="swatch" style="background:#E0AA6C;"></span>Moderate Risk · Something's shifting, monitor closely</div>
+            <div class="row"><span class="swatch" style="background:#E28B7A;"></span>High Risk · Sustained risk, a person is notified</div>
+          </div>
+        </div>
+
+        <div class="gauge-interactive">
+          <div class="gi-label" data-i18n="try_slider">Try it — drag to see how the app would respond</div>
+          <input type="range" min="0" max="100" value="42" class="gauge-slider" id="riskSlider" aria-label="Simulated depression risk score">
+          <div class="gi-readout">
+            <b id="giValue" style="color:#E0AA6C;">42%</b>
+            <span id="giBand" style="color:#9FB3AB;">RISK LEVEL · MODERATE RISK</span>
+          </div>
+          <p class="gi-status" id="giStatus">A gentle nudge and a coping-tool suggestion appear in the app — no alarms.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 06 APPS ================= -->
+    <section id="apps">
+      <div class="wrap">
+        <div class="eyebrow"><span class="n">06</span><span data-i18n="eyebrow_06">Dashboard &amp; App</span></div>
+        <h2 data-i18n="h2_06">AIoT Mental Health Monitoring System Dashboard</h2>
+        <div class="grid grid-2" style="margin-top:20px;">
+          <div class="card">
+            <h3>Real-Time Top Metrics</h3>
+            <p><strong>Heart Rate:</strong> 78 BPM - Normal<br>
+            <strong>SpO2:</strong> 98% - Normal<br>
+            <strong>Sleep:</strong> 6.2 Hours - Fair<br>
+            <strong>Activity:</strong> 4,350 Steps - Low<br>
+            <strong>Stress Level:</strong> 42/100 - Mild</p>
+          </div>
+          <div class="card">
+            <h3>Depression Risk Level</h3>
+            <p><strong>42% - Mild Risk</strong>: "Keep monitoring. Your data shows mild indicators of depression risk. Maintain a healthy lifestyle and take care of yourself."</p>
+            <p style="font-size: 13px; color: var(--teal-dim);"><strong>User:</strong> Yaqeen Mohamed (ID: AIoT-1024) | System Status: Online</p>
+          </div>
+        </div>
+        <div class="grid grid-2" style="margin-top:20px;">
+          <div class="card">
+            <h3>Charts & Trends</h3>
+            <p><strong>Health Trends Chart:</strong> Visualizes Heart Rate BPM, SpO2 %, Sleep Hours, and Activity Steps over recent days.</p>
+            <p><strong>Weekly Activity Steps:</strong> Mon 4.3K, Tue 5.1K, Wed 6.8K, Thu 3.2K, Fri 4.5K, Sat 6.2K, Sun 2.9K (Goal: 7,000 steps/day).</p>
+          </div>
+          <div class="card">
+            <h3>Risk History & Alerts</h3>
+            <p><strong>History:</strong> May 26 (Mild 42%), May 25 (Low 28%), May 24 (Mild 40%), May 23 (Low 22%), May 22 (Normal 15%).</p>
+            <p><strong>Recent Alerts:</strong> "High stress detected", "Sleep duration is low", "Keep it up!".</p>
+            <p style="font-size: 12px; font-style: italic;">Note: Data is for monitoring purpose only, not for medical diagnosis.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 07 FEATURES ================= -->
+    <section id="features">
+      <div class="wrap">
+        <div class="eyebrow"><span class="n">07</span><span data-i18n="eyebrow_07">Features</span></div>
+        <h2 data-i18n="h2_07">Core Platform Features</h2>
+        <div class="grid grid-3" style="margin-top:24px;">
+          <div class="feat"><span class="fi">01</span><h3>Activity Monitoring</h3><p>Tracks daily movement and step counts continuously to establish physical activity patterns.</p></div>
+          <div class="feat"><span class="fi">02</span><h3>Sleep Monitoring</h3><p>Evaluates sleep duration and quality, recognizing that poor sleep is a major depression indicator.</p></div>
+          <div class="feat"><span class="fi">03</span><h3>Heart Rate Monitoring</h3><p>Watches heart rate and SpO2 levels for physiological signs of stress and anxiety.</p></div>
+          <div class="feat"><span class="fi">04</span><h3>Personal Baseline</h3><p>Establishes what is "normal" for each specific user to detect meaningful deviations.</p></div>
+          <div class="feat"><span class="fi">05</span><h3>Periodic Questions</h3><p>Supplements sensor data with occasional questions to get a holistic view of the user's mental state.</p></div>
+          <div class="feat"><span class="fi">06</span><h3>Risk Score</h3><p>The ML model computes an overall risk score (Low, Moderate, High) to quantify depression risk.</p></div>
+          <div class="feat"><span class="fi">07</span><h3>Smart Dashboard</h3><p>A comprehensive web/app interface displaying all metrics, trends, and risk assessments clearly.</p></div>
+          <div class="feat"><span class="fi">08</span><h3>Alerts & Notifications</h3><p>Sends immediate alerts and personalized recommendations to users or caregivers if risk increases.</p></div>
+          <div class="feat"><span class="fi">09</span><h3>Historical Data</h3><p>Maintains secure logs of all past metrics and risk levels to observe long-term trends.</p></div>
+          <div class="feat"><span class="fi">10</span><h3>Privacy</h3><p>Ensures user data is securely stored and transmitted, prioritizing confidentiality and data protection.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 08 CHALLENGES ================= -->
+    <section id="ethics">
+      <div class="wrap">
+        <div class="eyebrow"><span class="n">08</span><span data-i18n="eyebrow_08">Challenges</span></div>
+        <h2>10 Challenges & How to Deal with Them</h2>
+        
+        <div class="grid grid-2" style="margin-top:20px;">
+          <div class="ethic">
+            <div class="mark">01</div>
+            <div><h3>Data Quality & Accuracy</h3><p data-i18n="ch1_d">Sensors are affected by movement or user position. Inaccurate data negatively affects AI analysis results.</p></div>
+          </div>
+          <div class="ethic">
+            <div class="mark">02</div>
+            <div><h3>Data Privacy & Security</h3><p data-i18n="ch2_d">Dealing with sensitive data requires strong encryption and protection to prevent data leakage or unauthorized access.</p></div>
+          </div>
+          <div class="ethic">
+            <div class="mark">03</div>
+            <div><h3 data-i18n="ch3_t">Internet Connectivity</h3><p data-i18n="ch3_d">Internet disconnection may lead to a failure to send real-time data, and reliance on Wi-Fi may not always be available.</p></div>
+          </div>
+          <div class="ethic">
+            <div class="mark">04</div>
+            <div><h3 data-i18n="ch4_t">AI Model Accuracy</h3><p data-i18n="ch4_d">Models depend on the quality and quantity of training data. There is a possibility of false results (false alerts or negatives).</p></div>
+          </div>
+          <div class="ethic">
+            <div class="mark">05</div>
+            <div><h3 data-i18n="ch5_t">User Diversity</h3><p data-i18n="ch5_d">Different ages, lifestyles, and health patterns affect prediction accuracy. Needs flexible models that adapt to all groups.</p></div>
+          </div>
+          <div class="ethic">
+            <div class="mark">06</div>
+            <div><h3>Battery Life & Power Consumption</h3><p data-i18n="ch6_d">Wearable devices need low-power, long-duration operation. Frequent data collection increases battery consumption.</p></div>
+          </div>
+          <div class="ethic">
+            <div class="mark">07</div>
+            <div><h3>Hardware & Software Compatibility</h3><p data-i18n="ch7_d">Different devices and sensors may cause compatibility issues, necessitating testing across multiple devices.</p></div>
+          </div>
+          <div class="ethic">
+            <div class="mark">08</div>
+            <div><h3 data-i18n="ch8_t">Cost</h3><p data-i18n="ch8_d">High-quality precise devices and sensors can be expensive. Cloud data storage and maintenance costs may also be high.</p></div>
+          </div>
+          <div class="ethic">
+            <div class="mark">09</div>
+            <div><h3 data-i18n="ch9_t">User Commitment</h3><p data-i18n="ch9_d">System success depends on the user's continuous wearing of the device; irregular use affects overall accuracy.</p></div>
+          </div>
+          <div class="ethic">
+            <div class="mark">10</div>
+            <div><h3>Legal & Regulatory</h3><p data-i18n="ch10_d">Compliance with laws and regulations protecting health data is critical; approvals must be obtained before system application.</p></div>
+          </div>
+        </div>
+
+        <div class="crisis-box" style="margin-top: 30px;">
+          <h3 data-i18n="deal_challenges">How to Deal with Challenges</h3>
+          <p>✓ Select reliable sensors and calibrate periodically<br>
+             ✓ Apply highest security and encryption standards<br>
+             ✓ Improve AI model using diverse and sufficient data<br>
+             ✓ Design easy attractive UI to encourage users<br>
+             ✓ Continuous follow-up and periodic system update</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 09 ROADMAP ================= -->
+    <section id="roadmap">
+      <div class="wrap">
+        <div class="eyebrow"><span class="n">09</span><span data-i18n="eyebrow_09">Roadmap</span></div>
+        <h2 data-i18n="h2_09">Where this goes next</h2>
+        <div class="road">
+          <div class="road-item">
+            <div class="phase">Phase 1 — Prototype</div>
+            <h3>Core Sensors Integration</h3>
+            <p>Connect ESP32 with MAX30102 and MPU6050 to reliably collect heart rate, SpO2, and activity data.</p>
+          </div>
+          <div class="road-item">
+            <div class="phase">Phase 2 — Cloud & App Connectivity</div>
+            <h3>Wi-Fi Sync & Dashboard UI</h3>
+            <p>Transmit data via MQTT/HTTP to Firebase/MySQL and display it on the React.js dashboard.</p>
+          </div>
+          <div class="road-item">
+            <div class="phase">Phase 3 — AI Modeling</div>
+            <h3>Machine Learning Implementation</h3>
+            <p>Train Logistic Regression, Random Forest, and SVM models on the collected sensor data to predict risk scores.</p>
+          </div>
+          <div class="road-item">
+            <div class="phase">Phase 4 — System Integration</div>
+            <h3>End-to-End Real-Time System</h3>
+            <p>Combine hardware, cloud, and ML into a real-time predictive loop, including alerts for High Risk.</p>
+          </div>
+          <div class="road-item">
+            <div class="phase">Phase 5 — Testing & Refinement</div>
+            <h3>Addressing Challenges</h3>
+            <p>Enhance battery life, optimize the AI models across diverse users, and ensure strict data privacy compliance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 10 REFERENCES ================= -->
+    <section id="references">
+      <div class="wrap">
+        <div class="eyebrow"><span class="n">10</span><span data-i18n="eyebrow_10">References</span></div>
+        <h2>Medical References & Tools</h2>
+        <div class="refs">
+          <h3 data-i18n="med_refs">Medical References</h3>
+          <ol>
+            <li class="ref-item">World Health Organization (WHO) - Depression and mental health disorders - <a href="https://www.who.int" target="_blank" rel="noopener">www.who.int</a></li>
+            <li class="ref-item">PubMed - Medical research on depression, biological indicators and health monitoring - <a href="https://pubmed.ncbi.nlm.nih.gov" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov</a></li>
+            <li class="ref-item">The Lancet Psychiatry - Scientific articles in psychiatry and depression - <a href="https://www.thelancet.com/journals/lanpsy" target="_blank" rel="noopener">www.thelancet.com/journals/lanpsy</a></li>
+            <li class="ref-item">Nature Medicine - Advanced studies in mental health and biological technologies - <a href="https://www.nature.com/nm" target="_blank" rel="noopener">www.nature.com/nm</a></li>
+            <li class="ref-item">IEEE Xplore - Research on IoT technology, AI and wearable devices in medical field - <a href="https://ieeexplore.ieee.org" target="_blank" rel="noopener">ieeexplore.ieee.org</a></li>
+            <li class="ref-item">SpringerLink - Books and journals in medicine, mental health and monitoring technologies - <a href="https://link.springer.com" target="_blank" rel="noopener">link.springer.com</a></li>
+            <li class="ref-item">ClinicalKey - Reliable medical source for clinical information and medical references - <a href="https://www.clinicalkey.com" target="_blank" rel="noopener">www.clinicalkey.com</a></li>
+          </ol>
+          <h3 style="margin-top: 20px;">Websites & Tools Used</h3>
+          <ul style="color: var(--teal-dim); padding-left: 20px; font-size: 14px; line-height: 1.6;">
+            <li><strong>Kaggle</strong> - Open dataset community for depression and mental health research and AI models - <a href="https://www.kaggle.com" target="_blank" rel="noopener">www.kaggle.com</a></li>
+            <li><strong>PhysioNet</strong> - Biological data (heart rate, activity, sleep) for research - <a href="https://www.physionet.org" target="_blank" rel="noopener">www.physionet.org</a></li>
+            <li><strong>UCI Machine Learning Repository</strong> - Diverse datasets for AI model training - <a href="https://archive.ics.uci.edu" target="_blank" rel="noopener">archive.ics.uci.edu</a></li>
+            <li><strong>Google Scholar</strong> - Academic research and trusted scientific articles - <a href="https://scholar.google.com" target="_blank" rel="noopener">scholar.google.com</a></li>
+            <li><strong>MDPI</strong> - Open access journals in biological medicine and mental health - <a href="https://www.mdpi.com" target="_blank" rel="noopener">www.mdpi.com</a></li>
+            <li><strong>Microsoft Academic</strong> - Academic search engine for research papers - <a href="https://academic.microsoft.com" target="_blank" rel="noopener">academic.microsoft.com</a></li>
+            <li><strong>Firebase (Google)</strong> - User data storage and management - <a href="https://firebase.google.com" target="_blank" rel="noopener">firebase.google.com</a></li>
+            <li><strong>Postman</strong> - API testing - <a href="https://www.postman.com" target="_blank" rel="noopener">www.postman.com</a></li>
+            <li><strong>VS Code</strong> - Integrated development environment - <a href="https://code.visualstudio.com" target="_blank" rel="noopener">code.visualstudio.com</a></li>
+            <li><strong>Draw.io / diagrams.net</strong> - System charts and architecture diagrams - <a href="https://app.diagrams.net" target="_blank" rel="noopener">app.diagrams.net</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="brand" data-i18n="brand_title">AIoT Depression Early Risk</div>
+    <div style="font-size: 11px; color: var(--teal);" data-i18n="brand_sub">// Monitoring System</div>
+    
+    </div>
+        <div class="fnote">All above references and sites are reliable and documented scientifically, and contribute to building a precise and reliable system that helps in early depression risk detection and improving healthcare quality. System is for monitoring purposes only, not for medical diagnosis.<br><a href="#top">↑ Back to top</a></div>
+      </div>
+    </footer>
+
+  </main>
+</div>
+
+</body>
+</html>

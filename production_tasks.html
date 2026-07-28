@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIoT Depression Monitoring System — Production Master Blueprint</title>
+<meta name="description" content="Complete production engineering task blueprint and step-by-step implementation guide for the AIoT Depression Early Risk Monitoring System.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0C1512">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230C1512'/%3E%3Cpath d='M4 18h4l2.5-8 4 16 3-11 2 5h8.5' stroke='%2372E8C6' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+
+<style>
+  /* Custom Extensions Matching Site Aesthetics */
+  .tech-badge-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0 16px 0;
+  }
+  .tech-badge {
+    font-family: var(--font-m);
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: var(--panel-2);
+    color: var(--teal);
+    border: 1px solid var(--hair-2);
+  }
+  .circuit-box {
+    background: var(--ink-2);
+    border: 1px dashed var(--teal-dim);
+    border-radius: 8px;
+    padding: 20px;
+    font-family: var(--font-m);
+    font-size: 12px;
+    color: var(--teal);
+    overflow-x: auto;
+    white-space: pre;
+    line-height: 1.4;
+    margin: 16px 0;
+  }
+  .task-card {
+    background: var(--panel);
+    border: 1px solid var(--hair-2);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 24px;
+    transition: border-color 0.2s ease;
+  }
+  .task-card:hover {
+    border-color: var(--teal-dim);
+  }
+  .task-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--hair);
+  }
+  .task-title-text {
+    font-family: var(--font-d);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--hi);
+  }
+  .paragraph-body {
+    font-size: 14px;
+    color: var(--lo);
+    line-height: 1.7;
+  }
+  .paragraph-body p {
+    margin-bottom: 12px;
+  }
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: var(--hi);
+    cursor: pointer;
+  }
+  .checklist-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--teal);
+    cursor: pointer;
+    margin-top: 2px;
+  }
+  .progress-summary-card {
+    background: var(--panel-2);
+    border: 1px solid var(--teal-dim);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  .progress-bar-bg {
+    background: var(--ink);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 10px;
+  }
+  .progress-bar-fill {
+    background: var(--teal);
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="backdrop" id="backdrop"></div>
+<button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+
+<div class="shell">
+
+  <!-- ================= SIDEBAR NAVIGATION ================= -->
+  <nav class="sidebar" id="sidebar" aria-label="Section navigation">
+    <div class="brand" data-i18n="pt_brand">AIoT Production Blueprint</div>
+    <div style="font-size: 11px; color: var(--teal);" data-i18n="pt_brand_sub">// Technical Task Guide</div>
+    
+    <!-- Language Toggle Switch (EN / AR) -->
+    <div class="lang-switch-wrap">
+      <span class="lang-switch-label">Language:</span>
+      <div class="lang-toggle-btn">
+        <span class="lang-btn-opt active" id="langBtnEn">EN</span>
+        <span class="lang-btn-opt" id="langBtnAr">AR</span>
+      </div>
+    </div>
+    <ul class="toc">
+      <li><a href="index.html" style="color: var(--teal); font-weight: 600;"><span class="idx">←</span><span data-i18n="pt_back_main">Main Site</span></a></li>
+      <li><a href="#overview"><span class="idx">00</span><span data-i18n="pt_nav_00">Overview</span></a></li>
+      <li><a href="#hardware"><span class="idx">01</span><span data-i18n="pt_nav_01">Hardware Assembly</span></a></li>
+      <li><a href="#firmware"><span class="idx">02</span><span data-i18n="pt_nav_02">ESP32 Firmware</span></a></li>
+      <li><a href="#backend"><span class="idx">03</span><span data-i18n="pt_nav_03">Cloud &amp; Database</span></a></li>
+      <li><a href="#aiml"><span class="idx">04</span><span data-i18n="pt_nav_04">AI Risk Engine</span></a></li>
+      <li><a href="#dashboard"><span class="idx">05</span><span data-i18n="pt_nav_05">Dashboard &amp; UI</span></a></li>
+      <li><a href="#security"><span class="idx">06</span><span data-i18n="pt_nav_06">Security Protocols</span></a></li>
+      <li><a href="#checklist"><span class="idx">07</span><span data-i18n="pt_nav_07">Master Checklist</span></a></li>
+    </ul>
+
+    <div class="progress-summary-card">
+      <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: var(--hi);">
+        <span data-i18n="pt_progress_title">Task Readiness</span>
+        <span id="progress-percent-val">0%</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-bar-fill"></div>
+      </div>
+      <div style="font-size: 11px; color: var(--lo-2); margin-top: 6px;" id="progress-count-val">
+        0 of 18 completed
+      </div>
+    </div>
+
+    <div class="sidebar-foot">
+      Production Execution Blueprint.<br>
+      AIoT Depression Monitoring System.<br>
+      v2.0 — 2026
+    </div>
+  </nav>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main id="main-content">
+
+    <!-- HERO HEADER -->
+    <section class="hero" id="top">
+      <div class="wrap">
+        <div class="hero-kicker" data-i18n="pt_hero_kicker">AIoT · Technical Implementation Guide · Production Tasks</div>
+        <h1 data-i18n="pt_hero_title">AIoT-Based Depression Early Risk Monitoring System — Technical Production Tasks</h1>
+        <p class="hero-lede" data-i18n="pt_hero_lede">This document outlines every phase, task, technology requirement, and step-by-step developer directive necessary to build, program, deploy, and take the AIoT Depression Early Risk Monitoring System into production. Each task details what to do, what technologies to use, and how to execute the step in clear narrative paragraphs.</p>
+        <div class="hero-meta">
+          <div class="m"><b>Hardware Stack</b>ESP32, PPG, MPU6050</div>
+          <div class="m"><b>Networking</b>MQTT over TLS 1.3</div>
+          <div class="m"><b>AI Modeling</b>Random Forest & SVM</div>
+          <div class="m"><b>Cloud Storage</b>PostgreSQL & Flask API</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 00 OVERVIEW -->
+    <section id="overview">
+      <div class="wrap">
+        <div class="eyebrow"><span class="n">00</span><span data-i18n="pt_eyebrow_00">Overview</span></div>
+        <h2 data-i18n="pt_h2_00">Engineering Task Framework</h2>
+        <p style="color: var(--lo); font-size: 15px; margin-bottom: 24px;" data-i18n="pt_lead_00">The system combines non-invasive physiological monitoring, embedded IoT edge computing, cloud databases, and machine learning classifiers to passively screen for early depression risk indicators over rolling 14-day observation windows.</p>
+        
+        <div class="grid grid-3">
+          <div class="card">
+            <h4>1. Hardware Precision</h4>
+            <p>Wiring shared I²C bus lines with exact 4.7kΩ pull-up resistors and resistor divider voltage sampling on ESP32 ADC.</p>
+          </div>
+          <div class="card">
+            <h4>2. Low-Power Firmware</h4>
+            <p>Programming 30-second active sampling windows followed by 15-minute RTC deep sleep cycles for 12+ day battery runtime.</p>
+          </div>
+          <div class="card">
+            <h4>3. Robust AI Engine</h4>
+            <p>Extracting 7 habit deviation features normalized against each patient's 14-day individual baseline norm.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 01 HARDWARE -->
+    <section id="hardware">
+      <div class="wrap">
+        <div class="eyebrow"><span class="n">01</span><span data-i18n="pt_eyebrow_01">Hardware Assembly</span></div>
+        <h2 data-i18n="pt_h2_01">Phase 1: Hardware Engineering &amp; Pin Connections</h2>
+
+        <!-- Task 1.1 -->
+        <div class="task-card">
+          <div class="task-header-row">
+            <div class="task-title-text" data-i18n="pt_t1_1_title">Task 1.1: Component Procurement &amp; Hardware Selection</div>
+            <span class="pill pill-green">Hardware Stack</span>
+          </div>
+          <div class="tech-badge-container">
+            <span class="tech-badge">Multimeter</span>
+            <span class="tech-badge">60W Soldering Station</span>
+            <span class="tech-badge">ESP32-WROOM-32</span>
+            <span class="tech-badge">MAX30102 PPG</span>
+            <span class="tech-badge">MPU6050 IMU</span>
+            <span class="tech-badge">DHT22</span>
+            <span class="tech-badge">SSD1306 OLED</span>
+            <span class="tech-badge">TP4056 USB-C</span>
+            <span class="tech-badge">3.7V LiPo Battery</span>
+          </div>
+          <div class="paragraph-body">
+            <p data-i18n="pt_t1_1_body">
+              <strong>What To Do:</strong> Acquire all specified hardware modules and verify their operating tolerances before physical assembly. Inspect each sensor breakout board to ensure it supports 3.3V logic levels. Test the LiPo battery voltage using a digital multimeter (confirming nominal 3.7V and max 4.2V charge level), verify that the TP4056 module properly cuts off charging at 4.2V, and ensure the MAX30102 optical sensor lens is free from physical obstructions.
+            </p>
+        <!-- Task 1.2 -->
+        <div class="task-card">
+          <div class="task-header-row">
+            <div class="task-title-text" data-i18n="pt_t1_2_title">Task 1.2: Wiring &amp; Circuit Assembly (Shared I²C Bus)</div>
+            <span class="pill pill-amber">Circuit Schema</span>
+          </div>
+          <div class="tech-badge-container">
+            <span class="tech-badge">I²C Protocol (400kHz)</span>
+            <span class="tech-badge">4.7kΩ Pull-ups</span>
+            <span class="tech-badge">100kΩ/100kΩ ADC Divider</span>
+            <span class="tech-badge">Common Ground</span>
+          </div>
+
+          <div class="circuit-box">
+                                     +-----------------------------------------+
+                                     |             ESP32-WROOM-32              |
+                                     |                                         |
+   [3.7V LiPo Battery] ------------->| VIN (via SPDT Switch & TP4056 OUT+)     |
+                                     | GND  <--------------------------------->|---> Common System Ground
+                                     |                                         |
+   [MAX30102 PPG Optical] ---------->| GPIO21 (SDA) <--- Shared I2C Bus ------>|---> [MPU6050 IMU]
+   [0.96" SSD1306 OLED] ------------>| GPIO22 (SCL) <--- (4.7kΩ Pull-ups) ---->|---> [SSD1306 OLED]
+                                     |                                         |
+   [DHT22 Temp & Humidity] --------->| GPIO4  (DATA)  (10kΩ Pull-up to 3.3V)   |
+   [MPU6050 Motion INT] ------------>| GPIO19 (INT)   (Motion Wakeup)          |
+   [Battery Divider R1/R2] --------->| GPIO34 (ADC1_CH6) (Analog Volt Check)   |
+                                     +-----------------------------------------+
+          </div>
+
+          <div class="paragraph-body">
+            <p data-i18n="pt_t1_2_body">
+              <strong>What To Do:</strong> Build the prototype on a breadboard or custom PCB by creating a single shared I²C bus between the ESP32 microcontroller, MAX30102 PPG sensor, MPU6050 accelerometer, and SSD1306 OLED display. Connect the SDA line to ESP32 GPIO21 and SCL to GPIO22, adding 4.7kΩ pull-up resistors from each line to the 3.3V power rail to maintain clean signal rise times. Wire the DHT22 temperature and humidity data output to GPIO4 with a 10kΩ pull-up resistor to 3.3V. Wire the MPU6050 interrupt line (INT) to GPIO19 to allow motion-triggered wakeups. Construct a voltage divider using two equal 100kΩ resistors between the battery positive terminal, ESP32 GPIO34 (ADC input), and Ground to safely measure battery voltage up to 4.2V without exceeding the ESP32 maximum 3.3V input rating. Connect the main ground rail across all modules and route battery power through the TP4056 module and an SPDT slide switch.
+            </p>
+          </div>
+        </div>
+
+        <!-- Task 1.3 -->
+        <div class="task-card">
+          <div class="task-header-row">
+            <div class="task-title-text" data-i18n="pt_t1_3_title">Task 1.3: Power Management &amp; Battery Optimization</div>
+            <span class="pill pill-green">Power Math</span>
+          </div>
+          <div class="tech-badge-container">
+            <span class="tech-badge">ESP32 Deep Sleep API</span>
+            <span class="tech-badge">RTC Wakeup Timer</span>
+            <span class="tech-badge">1.64mA Avg Current</span>
+          </div>
+          <div class="paragraph-body">
+            <p data-i18n="pt_t1_3_body">
+              <strong>What To Do:</strong> Implement an aggressive low-power strategy to allow the wearable smartband to operate continuously for over 10 days on a single 500mAh LiPo battery charge. Define a duty cycle where the ESP32 stays active for approximately 30 seconds to sample sensor metrics, update the wrist display, and transmit data, then enters deep sleep for 15 minutes (900 seconds) using the internal RTC timer. Calculate the analog voltage conversion formula on GPIO34 to account for the 2:1 resistor divider ratio, mapping raw 12-bit ADC values (0–4095) to actual battery voltage. Configure sensors to enter low-power shutdown states during ESP32 deep sleep periods.
+            </p>
+          </div>
+        </div>
+
+        <!-- Task 1.4 -->
+        <div class="task-card">
+          <div class="task-header-row">
+            <div class="task-title-text" data-i18n="pt_t1_4_title">Task 1.4: Custom PCB Design &amp; 3D Enclosure Fabrication</div>
+            <span class="pill pill-green">PCB &amp; CAD</span>
+          </div>
+          <div class="tech-badge-container">
+            <span class="tech-badge">KiCad / EasyEDA</span>
+            <span class="tech-badge">Gerber Files</span>
+            <span class="tech-badge">PETG Rigid Housing</span>
+            <span class="tech-badge">TPU Wristband</span>
+          </div>
+          <div class="paragraph-body">
+            <p data-i18n="pt_t1_4_body">
+              <strong>What To Do:</strong> Design a compact 2-layer FR4 printed circuit board (PCB) tailored to a wristband form factor (38mm x 42mm). Place decoupling capacitors (0.1µF) close to sensor power pins and route ground copper pours on both top and bottom layers. Model a 3D-printable ergonomic enclosure using PETG for the main rigid body and flexible TPU for the wrist strap. Include a recessed bottom cutout allowing the MAX30102 optical sensor to press flush against wrist skin, a top window for the OLED screen, and a side port for USB-C charging.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 FIRMWARE -->
+    <section id="firmware">
+      <div class="wrap">
+        <div class="eyebrow"><span class="n">02</span><span data-i18n="pt_eyebrow_02">ESP32 Firmware</span></div>
+        <h2 data-i18n="pt_h2_02">Phase 2: Embedded Firmware Development (C++)</h2>
+
+        <!-- Task 2.1 -->
+        <div class="task-card">
+          <div class="task-header-row">
+            <div class="task-title-text" data-i18n="pt_t2_1_title">Task 2.1: Development Environment &amp; Library Setup</div>
+            <span class="pill pill-green">C++ Setup</span>
+          </div>
+          <div class="tech-badge-container">
+            <span class="tech-badge">PlatformIO / Arduino IDE</span>
+            <span class="tech-badge">C++17 Compiler</span>
+            <span class="tech-badge">SparkFun MAX3010x</span>
+            <span class="tech-badge">Adafruit MPU6050</span>
+            <span class="tech-badge">PubSubClient</span>
+            <span class="tech-badge">ArduinoJson</span>
+          </div>
+          <div class="paragraph-body">
+            <p data-i18n="pt_t2_1_body">
+              <strong>What To Do:</strong> Set up a clean C++ development environment targeting the ESP32 architecture. Configure the project configuration file (<code>platformio.ini</code> or Arduino environment) with board settings, CPU frequency (240MHz active, 80MHz low power), serial baud rate (115200), and import official libraries for Wire communication, SSD1306 display rendering, SparkFun MAX30102 PPG handling, Adafruit MPU6050 IMU tracking, DHT sensor reading, PubSubClient MQTT networking, and ArduinoJson parsing.
+            </p>
+          </div>
+        </div>
+
+        <!-- Task 2.2 -->
+        <div class="task-card">
+          <div class="task-header-row">
+            <div class="task-title-text" data-i18n="pt_t2_2_title">Task 2.2: Sensor Sampling &amp; Signal Processing Algorithms</div>
+            <span class="pill pill-amber">Algorithms</span>
+          </div>
+          <div class="tech-badge-container">
+            <span class="tech-badge">Signal Magnitude Area (SMA)</span>
+            <span class="tech-badge">PPG Peak Detection</span>
+            <span class="tech-badge">Red/IR AC-DC Ratio</span>
+            <span class="tech-badge">OLED Display Rendering</span>
+          </div>
+          <div class="paragraph-body">
+            <p data-i18n="pt_t2_2_body">
+              <strong>What To Do:</strong> Write firmware modules that sample physical sensors during the active duty cycle. Develop a Signal Magnitude Area (SMA) algorithm that processes MPU6050 3-axis accelerometer vectors (|a_x| + |a_y| + |a_z|) to quantify physical activity levels. Implement a peak-detection algorithm on the MAX30102 infrared optical signal to measure heart rate (BPM) and compute blood oxygen saturation (SpO₂) using the ratio of Red and IR AC/DC light absorbances. Sample ambient temperature and humidity from the DHT22. Format these metrics into clear text and render them on the wrist OLED display.
+            </p>
+          </div>
+        </div>
+
+        <!-- Task 2.3 -->
+        <div class="task-card">
+          <div class="task-header-row">
+            <div class="task-title-text" data-i18n="pt_t2_3_title">Task 2.3: Telemetry Packaging &amp; Deep Sleep Transmit Cycle</div>
+            <span class="pill pill-green">Networking</span>
+          </div>
+          <div class="tech-badge-container">
+            <span class="tech-badge">Wi-Fi 802.11 b/g/n</span>
+            <span class="tech-badge">MQTT Client</span>
+            <span class="tech-badge">JSON Serialization</span>
+            <span class="tech-badge">SPIFFS / NVS Offline Buffer</span>
+          </div>
+          <div class="paragraph-body">
+            <p data-i18n="pt_t2_3_body">
+              <strong>What To Do:</strong> Develop the main execution loop inside the firmware setup routine. Serialize the sampled metrics (heart rate, oxygen saturation, activity SMA, temperature, humidity, battery level, device ID) into a JSON payload. Attempt connection to the local Wi-Fi network and publish the payload to an MQTT telemetry topic. Include retry limits so that if Wi-Fi is unavailable, telemetry data is saved locally to ESP32 Flash memory (SPIFFS/NVS) to prevent data loss. Once transmission or buffering completes, enable the RTC sleep timer and command the ESP32 into deep sleep mode.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 BACKEND -->
+    <section id="backend">
+      <div class="wrap">
+        <div class="eyebrow"><span class="n">03</span><span data-i18n="pt_eyebrow_03">Cloud &amp; Database</span></div>
+        <h2 data-i18n="pt_h2_03">Phase 3: Cloud Infrastructure, Broker &amp; Database</h2>
+
+        <!-- Task 3.1 -->
+        <div class="task-card">
+          <div class="task-header-row">
+            <div class="task-title-text" data-i18n="pt_t3_1_title">Task 3.1: Cloud Server &amp; MQTT Broker Deployment</div>
+            <span class="pill pill-green">Cloud Infrastructure</span>
+          </div>
+          <div class="tech-badge-container">
+            <span class="tech-badge">AWS EC2 / Ubuntu 22.04</span>
+            <span class="tech-badge">Mosquitto MQTT Broker</span>
+            <span class="tech-badge">TLS 1.3 (Port 8883)</span>
+            <span class="tech-badge">Certbot SSL</span>
+          </div>
+          <div class="paragraph-body">
+            <p data-i18n="pt_t3_1_body">
+              <strong>What To Do:</strong> Provision a secure cloud virtual server and install the Mosquitto MQTT broker. Configure TLS 1.3 encryption on Port 8883 using SSL certificates generated via Let's Encrypt / Certbot. Establish secure topic structures (e.g., aiot/depression/telemetry/{device_id} and aiot/depression/alerts/{device_id}) and enforce username/password authentication for connected microcontrollers.
+            </p>
+          </div>
+        </div>
+
+        <!-- Task 3.2 -->
+        <div class="task-card">
+          <div class="task-header-row">
+            <div class="task-title-text" data-i18n="pt_t3_2_title">Task 3.2: Database Relational Schema Design</div>
+            <span class="pill pill-green">Database Engine</span>
+          </div>
+          <div class="tech-badge-container">
+            <span class="tech-badge">PostgreSQL 15</span>
+            <span class="tech-badge">Relational Modeling</span>
+            <span class="tech-badge">B-Tree Time-Series Index</span>
+            <span class="tech-badge">Foreign Keys</span>
+          </div>
+          <div class="paragraph-body">
+            <p data-i18n="pt_t3_2_body">
+              <strong>What To Do:</strong> Design and deploy a relational database schema optimized for time-series biometric logging and user habit analysis. Create a <code>users</code> table storing patient profiles and baseline status; a <code>sensor_telemetry</code> table recording raw streaming data (heart rate, SpO₂, activity SMA, ambient metrics, battery level, timestamp); and a <code>daily_aggregates</code> table holding computed daily metrics (average heart rate, resting heart rate, sleep duration, wake time variance, total daily movement, PHQ-9 survey scores, and risk levels). Add composite indexes on (user_id, timestamp) to ensure sub-millisecond query execution over millions of telemetry logs.
+            </p>
+          </div>
+        </div>
+
+        <!-- Task 3.3 -->
+        <div class="task-card">
+          <div class="task-header-row">
+            <div class="task-title-text" data-i18n="pt_t3_3_title">Task 3.3: Ingestion API Service &amp; Data Pipelines</div>
+            <span class="pill pill-amber">REST API</span>
+          </div>
+          <div class="tech-badge-container">
+            <span class="tech-badge">Python 3.11</span>
+            <span class="tech-badge">Flask / FastAPI</span>
+            <span class="tech-badge">Gunicorn WSGI</span>
+            <span class="tech-badge">Connection Pooling</span>
+          </div>
+          <div class="paragraph-body">
+            <p data-i18n="pt_t3_3_body">
+              <strong>What To Do:</strong> Build a lightweight, scalable backend REST API service in Python. Implement API endpoints for receiving device telemetry uploads (/api/v1/telemetry), accepting PHQ-9 micro-questionnaire submissions (/api/v1/questionnaire), fetching daily metrics for dashboard rendering (/api/v1/metrics), and retrieving recent risk scores. Ensure payload validation, error handling, database connection pooling, and secure response formatting.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 AIML -->
+    <section id="aiml">
+      <div class="wrap">
+        <div class="eyebrow"><span class="n">04</span><span data-i18n="pt_eyebrow_04">AI Risk Engine</span></div>
+        <h2 data-i18n="pt_h2_04">Phase 4: Machine Learning Risk Screening Engine</h2>
+
+        <!-- Task 4.1 -->
+        <div class="task-card">
+          <div class="task-header-row">
+            <div class="task-title-text" data-i18n="pt_t4_1_title">Task 4.1: Feature Engineering &amp; Baseline Normalization</div>
+            <span class="pill pill-green">Feature Pipeline</span>
+          </div>
+          <div class="tech-badge-container">
+            <span class="tech-badge">Python Pandas / NumPy</span>
+            <span class="tech-badge">Scikit-Learn Preprocessing</span>
+            <span class="tech-badge">14-Day Rolling Window</span>
+            <span class="tech-badge">Z-score Baseline Scaling</span>
+          </div>
+          <div class="paragraph-body">
+            <p data-i18n="pt_t4_1_body">
+              <strong>What To Do:</strong> Construct a data processing pipeline that converts raw daily telemetry logs into 7 core physiological features over rolling 7-to-14-day windows. Calculate:
+              <br>1. <strong>Sleep Duration Delta:</strong> Deviation in total daily sleep hours compared to the user's personal baseline.
+              <br>2. <strong>Wake Time Variance:</strong> Schedule irregularity in morning wakeup times.
+              <br>3. <strong>Diurnal Movement SMA:</strong> Total physical activity intensity accumulated during daytime hours.
+              <br>4. <strong>Resting Heart Rate (RHR):</strong> Pulse rate measured specifically during deep sleep periods.
+              <br>5. <strong>HRV Proxy:</strong> Root Mean Square of Successive Differences (RMSSD) derived from inter-beat intervals.
+              <br>6. <strong>Ambient Exposure Ratio:</strong> Time spent in natural ambient light and comfortable temperature ranges.
+              <br>7. <strong>PHQ-9 Micro-Survey Score:</strong> Subjective mood check-in score normalized between 0 and 27.
+              <br>Normalize all features against each individual user's initial baseline to eliminate inter-individual variations.
+            </p>
+          </div>
+        </div>
+
+        <!-- Task 4.2 -->
+        <div class="task-card">
+          <div class="task-header-row">
+            <div class="task-title-text" data-i18n="pt_t4_2_title">Task 4.2: Model Training, Validation &amp; Selection</div>
+            <span class="pill pill-amber">Model Training</span>
+          </div>
+          <div class="tech-badge-container">
+            <span class="tech-badge">Random Forest Classifier</span>
+            <span class="tech-badge">Logistic Regression</span>
+            <span class="tech-badge">Support Vector Machine (SVM)</span>
+            <span class="tech-badge">ROC-AUC &amp; Joblib</span>
+          </div>
+          <div class="paragraph-body">
+            <p data-i18n="pt_t4_2_body">
+              <strong>What To Do:</strong> Build a machine learning training script that evaluates multiple classification algorithms (Random Forest, Logistic Regression, SVM) on labeled physiological habit datasets. Split data into 80% training and 20% testing subsets. Train models to classify habit patterns into three distinct risk categories (Low Risk, Moderate Risk, High Risk). Evaluate model performance using confusion matrices, precision, recall, and ROC-AUC metrics. Select the Random Forest model for production due to its robust handling of non-linear interactions between sleep irregularity and physical activity drops, and export the trained model file (.pkl) using Joblib.
+            </p>
+          </div>
+        </div>
+
+        <!-- Task 4.3 -->
+        <div class="task-card">
+          <div class="task-header-row">
+            <div class="task-title-text" data-i18n="pt_t4_3_title">Task 4.3: Real-Time Risk Inference &amp; Alerting Service</div>
+            <span class="pill pill-green">Inference Engine</span>
+          </div>
+          <div class="tech-badge-container">
+            <span class="tech-badge">Python Joblib Loader</span>
+            <span class="tech-badge">Continuous Risk Score (0-100%)</span>
+            <span class="tech-badge">Low / Mod / High Tiers</span>
+            <span class="tech-badge">Alert Notifications</span>
+          </div>
+          <div class="paragraph-body">
+            <p data-i18n="pt_t4_3_body">
+              <strong>What To Do:</strong> Deploy a background prediction service that automatically runs daily risk inferences for active users. The service feeds the latest 14-day aggregated features into the loaded Random Forest model, generating a continuous Risk Score percentage (0–100%) and categorizing it into Low (0–33%), Moderate (34–66%), or High (67–100%) Risk levels. Configure automated alerts when a user's risk score exceeds threshold boundaries for 3 consecutive days, generating actionable notifications for both the user dashboard and clinical supervisors.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 DASHBOARD -->
+    <section id="dashboard">
+      <div class="wrap">
+        <div class="eyebrow"><span class="n">05</span><span data-i18n="pt_eyebrow_05">Dashboard &amp; UI</span></div>
+        <h2 data-i18n="pt_h2_05">Phase 5: Web Dashboard &amp; User Interface Integration</h2>
+
+        <!-- Task 5.1 -->
+        <div class="task-card">
+          <div class="task-header-row">
+            <div class="task-title-text" data-i18n="pt_t5_1_title">Task 5.1: Real-Time Dashboard &amp; UI Data Integration</div>
+            <span class="pill pill-green">Web App</span>
+          </div>
+          <div class="tech-badge-container">
+            <span class="tech-badge">HTML5 / Vanilla CSS3</span>
+            <span class="tech-badge">JavaScript ES6+</span>
+            <span class="tech-badge">WebSockets / REST Polling</span>
+            <span class="tech-badge">Three.js 3D Sync</span>
+            <span class="tech-badge">Bilingual EN/AR</span>
+          </div>
+          <div class="paragraph-body">
+            <p data-i18n="pt_t5_1_body">
+              <strong>What To Do:</strong> Integrate the existing web dashboard interface with the Python backend API. Configure dynamic polling or WebSocket streams to update real-time heart rate gauges, oxygen saturation readouts, activity intensity timelines, and risk level indicators. Connect incoming telemetry states to the Three.js 3D wearable smartband and breadboard canvas to highlight sensor components visually as data streams in. Ensure full bilingual toggle support (English and Egyptian Arabic).
+            </p>
+          </div>
+        </div>
+
+        <!-- Task 5.2 -->
+        <div class="task-card">
+          <div class="task-header-row">
+            <div class="task-title-text" data-i18n="pt_t5_2_title">Task 5.2: Micro-Questionnaire Survey Component</div>
+            <span class="pill pill-amber">Survey Modal</span>
+          </div>
+          <div class="tech-badge-container">
+            <span class="tech-badge">PHQ-9 / GAD-7 Standards</span>
+            <span class="tech-badge">HTML5 Modal Controls</span>
+            <span class="tech-badge">Composite Mood Scoring</span>
+            <span class="tech-badge">POST Payload Sync</span>
+          </div>
+          <div class="paragraph-body">
+            <p data-i18n="pt_t5_2_body">
+              <strong>What To Do:</strong> Build an interactive, non-intrusive micro-questionnaire modal into the dashboard user interface based on clinical PHQ-9 and GAD-7 standards. Prompt users periodically (e.g., once every 3 days) with 4 brief questions covering mood, sleep quality, energy levels, and focus. Calculate the composite score, validate user inputs, and transmit the survey payload to the backend API to enrich passive sensor features with subjective user data.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 SECURITY -->
+    <section id="security">
+      <div class="wrap">
+        <div class="eyebrow"><span class="n">06</span><span data-i18n="pt_eyebrow_06">Security Protocols</span></div>
+        <h2 data-i18n="pt_h2_06">Phase 6: Security, Encryption &amp; Legal Disclaimers</h2>
+
+        <div class="task-card">
+          <div class="task-header-row">
+            <div class="task-title-text" data-i18n="pt_t6_1_title">Task 6.1: End-to-End Security, Encryption &amp; Verification</div>
+            <span class="pill pill-red">HIPAA / GDPR</span>
+          </div>
+          <div class="tech-badge-container">
+            <span class="tech-badge">HTTPS / TLS 1.3</span>
+            <span class="tech-badge">AES-256-GCM Database Encryption</span>
+            <span class="tech-badge">Salted SHA-256 Hashing</span>
+            <span class="tech-badge">Nginx Rate Limiting</span>
+          </div>
+          <div class="paragraph-body">
+            <p data-i18n="pt_t6_1_body">
+              <strong>What To Do:</strong> Enforce strict data security and patient privacy measures across the entire IoT pipeline. Require TLS 1.3 encryption for all microcontroller MQTT traffic on Port 8883 and HTTPS for REST API requests. Implement AES-256 encryption for biometric logs stored in the database. Salt and hash all user identity records using SHA-256 to ensure data anonymization in compliance with HIPAA and GDPR regulations. Configure Nginx as a reverse proxy with rate limiting to defend against Denial-of-Service (DoS) attacks. Conduct hardware low-voltage brownout tests and ensure legal screening disclaimers are presented clearly.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 CHECKLIST -->
+    <section id="checklist">
+      <div class="wrap">
+        <div class="eyebrow"><span class="n">07</span><span data-i18n="pt_eyebrow_07">Master Checklist</span></div>
+        <h2 data-i18n="pt_h2_07">Phase 7: Interactive Master Execution Checklist</h2>
+        <p style="color: var(--lo); font-size: 14px; margin-bottom: 24px;">Track your real-world production task completion. Progress is automatically saved in your browser.</p>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <h4 style="color: var(--teal); margin-bottom: 16px;">Hardware &amp; Circuit Tasks</h4>
+            <label class="checklist-item"><input type="checkbox" class="task-chk" data-chk="chk-1"> Procure ESP32, MAX30102, MPU6050, DHT22, OLED</label>
+            <label class="checklist-item"><input type="checkbox" class="task-chk" data-chk="chk-2"> Wire shared I²C bus (GPIO21 SDA, GPIO22 SCL)</label>
+            <label class="checklist-item"><input type="checkbox" class="task-chk" data-chk="chk-3"> Add 4.7kΩ I²C pull-up resistors to 3.3V</label>
+            <label class="checklist-item"><input type="checkbox" class="task-chk" data-chk="chk-4"> Wire 100kΩ/100kΩ resistor divider to GPIO34 ADC</label>
+            <label class="checklist-item"><input type="checkbox" class="task-chk" data-chk="chk-5"> Verify 30s active / 15m deep sleep power budget</label>
+            <label class="checklist-item"><input type="checkbox" class="task-chk" data-chk="chk-6"> Design 2-layer FR4 PCB &amp; 3D PETG/TPU wristband</label>
+          </div>
+
+          <div class="card">
+            <h4 style="color: var(--amber); margin-bottom: 16px;">Firmware &amp; Software Tasks</h4>
+            <label class="checklist-item"><input type="checkbox" class="task-chk" data-chk="chk-7"> Configure C++ environment with PlatformIO</label>
+            <label class="checklist-item"><input type="checkbox" class="task-chk" data-chk="chk-8"> Implement SMA activity calculation algorithm</label>
+            <label class="checklist-item"><input type="checkbox" class="task-chk" data-chk="chk-9"> Code MAX30102 peak detection &amp; SpO₂ ratios</label>
+            <label class="checklist-item"><input type="checkbox" class="task-chk" data-chk="chk-10"> Package JSON payloads &amp; MQTT TLS client</label>
+            <label class="checklist-item"><input type="checkbox" class="task-chk" data-chk="chk-11"> Provision Mosquitto MQTT broker on cloud VM</label>
+            <label class="checklist-item"><input type="checkbox" class="task-chk" data-chk="chk-12"> Deploy PostgreSQL schema &amp; B-Tree indexes</label>
+          </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-top: 20px;">
+          <div class="card">
+            <h4 style="color: var(--teal); margin-bottom: 16px;">AI &amp; Inference Pipeline</h4>
+            <label class="checklist-item"><input type="checkbox" class="task-chk" data-chk="chk-13"> Build 14-day rolling feature extraction pipeline</label>
+            <label class="checklist-item"><input type="checkbox" class="task-chk" data-chk="chk-14"> Train &amp; compare Random Forest, Logistic Reg, SVM</label>
+            <label class="checklist-item"><input type="checkbox" class="task-chk" data-chk="chk-15"> Export trained .pkl model &amp; launch inference service</label>
+          </div>
+
+          <div class="card">
+            <h4 style="color: var(--red); margin-bottom: 16px;">UI, Security &amp; Compliance</h4>
+            <label class="checklist-item"><input type="checkbox" class="task-chk" data-chk="chk-16"> Connect dashboard WebSockets to backend APIs</label>
+            <label class="checklist-item"><input type="checkbox" class="task-chk" data-chk="chk-17"> Enable AES-256 database column encryption</label>
+            <label class="checklist-item"><input type="checkbox" class="task-chk" data-chk="chk-18"> Verify legal medical screening disclaimer displays</label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Progress Synchronization Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('.task-chk');
+    const fillBar = document.getElementById('progress-bar-fill');
+    const percentText = document.getElementById('progress-percent-val');
+    const countText = document.getElementById('progress-count-val');
+
+    checkboxes.forEach(chk => {
+      const key = 'aiot_task_' + chk.getAttribute('data-chk');
+      if (localStorage.getItem(key) === 'true') {
+        chk.checked = true;
+      }
+      chk.addEventListener('change', updateChecklistProgress);
+    });
+
+    function updateChecklistProgress() {
+      const total = checkboxes.length;
+      let checked = 0;
+
+      checkboxes.forEach(chk => {
+        const key = 'aiot_task_' + chk.getAttribute('data-chk');
+        localStorage.setItem(key, chk.checked);
+        if (chk.checked) checked++;
+      });
+
+      const pct = Math.round((checked / total) * 100);
+      if (fillBar) fillBar.style.width = pct + '%';
+      if (percentText) percentText.textContent = pct + '%';
+      if (countText) countText.textContent = `${checked} of ${total} completed`;
+    }
+
+    updateChecklistProgress();
+  });
+</script>
+<script src="script.js"></script>
+</body>
+</html>
