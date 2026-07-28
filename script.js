@@ -73,73 +73,6 @@ function initAIoTApp() {
       if (currentLang === 'ar') setLanguage('ar');
     }
   }).catch(() => {});
- شغل برنامج يعمل تقييم يومي تلقائي لكل مستخدم. الموديل يقرا آخر 14 يوم ويحسب درجة خطر متصلة من 0% لـ 100% ويصنفها: خطر منخفض (0-33%)، خطر متوسط (34-66%)، وخطر مرتفع (67-100%). ولو درجة الخطر فضلت مرتفعة لمدة 3 أيام متتالية، ابعت تنبيه فوري لتطبيق المستخدم والتطبيق الخاص بالطبيب.", "pt_eyebrow_05": "05 لوحة التحكم والتطبيق", "pt_h2_05": "المرحلة الخامسة: ربط الواجهة وتطبيق الموبايل", "pt_t5_1_title": "المهمة 5.1: ربط الشاشة بالبيانات المباشرة والتطبيق", "pt_t5_1_stack": "التقنيات: HTML5, CSS3 Glassmorphism, JavaScript ES6+, WebSockets / REST API, Three.js 3D Engine, دعم اللغتين EN/AR.", "pt_t5_1_body": "المطلوب منك: اربط شاشة المتابعة (Dashboard) بسيرفر البايثون وقاعدة البيانات. اعرض العدادات المباشرة لنبض القلب والأكسجين والرسومات البيانية لتغيرات النوم والحركة. واربط قراءات الحساسات بمجسم الساعة الـ 3D عشان ينور الجزء الخاص بالحساس النشط فوراً، وتأكد إن زرار تغيير اللغة (إنجليزي / عربي عامي مصري) شغال بسلاسة.", "pt_t5_2_title": "المهمة 5.2: نافذة الاستبيان النفسي الدوري (PHQ-9)", "pt_t5_2_stack": "التقنيات: نافذة HTML5 Modal تفاعلية، التحكم في الإدخال، إرسال البيانات عبر REST API.", "pt_t5_2_body": "المطلوب منك: اعمل شاشة استبيان بسيطة بتظهر للمستخدم كل 3 أيام فيها 4 أسئلة قصيرة وسهلة عن المزاج، الطاقة، جودة النوم، والتركيز بناءً على استبيانات PHQ-9 الطبية المعتمدة. احسب النتيجة وابعثها للسيرفر عشان تضاف لمؤشرات الحساسات وتدي تقييم أشمل.", "pt_eyebrow_06": "06 الأمان والخصوصية", "pt_h2_06": "المرحلة السادسة: تشفير البيانات والالتزام الطبي", "pt_t6_1_title": "المهمة 6.1: التشفير وحماية الخصوصية والاختبارات", "pt_t6_1_stack": "التقنيات: تشفير HTTPS / TLS 1.3، تشفير قواعد البيانات AES-256-GCM، إخفاء هوية المستخدم Salted SHA-256 Hashing، سيرفر Nginx.", "pt_t6_1_body": "المطلوب منك: طبق أعلى درجات الأمان وحماية الخصوصية للبيانات الصحية. شغل التشفير بنظام TLS 1.3 و HTTPS لمنع اختراق البيانات أثناء الانتقال. شفر البيانات الطبية في قاعدة البيانات بنظام AES-256. اخفِ هوية المستخدمين باستخدام SHA-256 مع الملح (Salt) لضمان الامتثال لقوانين HIPAA و GDPR. واعمل اختبارات للبطارية عند الانخفاض، وتأكد من عرض التنويه الطبي الواضح إن النظام للمتابعة المبكرة وليس للتشخيص الطبي النهائي.", "pt_eyebrow_07": "07 قائمة المهام الكاملة", "pt_h2_07": "المرحلة السابعة: قائمة المتابعة والجاهزية للإنتاج", "hero_kicker": "ذكاء اصطناعي · حساسات ذكية · دعم نفسي مبكر", "hero_title": "نظام ذكي للمتابعة المبكرة لخطر الاكتئاب (AIoT)", "hero_lede": "النظام ده بيساعد في الاكتشاف المبكر لخطر الاكتئاب عن طريق دمج الذكاء الاصطناعي مع إنترنت الأشياء (AIoT). النظام بيجمع بيانات جسمك ونشاطك اليومي زي ضربات القلب، ساعات النوم، مستوى الحركة، وطريقة استخدام التطبيق من خلال ساعة ذكية وتطبيق موبايل. البيانات دي بتتتبع بأمان وتتبعت للسحابة الإلكترونية، والذكاء الاصطناعي بيحللها عشان يحدد درجة الخطر. ولو اكتشف إن فيه خطر مرتفع، بيبعت تنبيهات فورية ونصايح مخصصة توجهك لمختص لو احتاجت، وده عشان تحسن صحتك النفسية وجودة حياتك."};
-  let currentLang = localStorage.getItem('site_lang') || 'en';
-
-  const langEnBtn = document.getElementById('langBtnEn');
-  const langArBtn = document.getElementById('langBtnAr');
-
-  function setLanguage(lang) {
-    currentLang = lang;
-    localStorage.setItem('site_lang', lang);
-
-    if (lang === 'ar') {
-      document.documentElement.setAttribute('dir', 'rtl');
-      document.documentElement.setAttribute('lang', 'ar');
-      if (langArBtn) langArBtn.classList.add('active');
-      if (langEnBtn) langEnBtn.classList.remove('active');
-      
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[key]) {
-          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-            el.value = translations[key];
-          } else {
-            el.innerHTML = translations[key];
-          }
-        }
-      });
-    } else {
-      document.documentElement.setAttribute('dir', 'ltr');
-      document.documentElement.setAttribute('lang', 'en');
-      if (langEnBtn) langEnBtn.classList.add('active');
-      if (langArBtn) langArBtn.classList.remove('active');
-
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const orig = el.getAttribute('data-i18n-en');
-        if (orig) {
-          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-            el.value = orig;
-          } else {
-            el.innerHTML = orig;
-          }
-        }
-      });
-    }
-
-    setTimeout(() => {
-      window.dispatchEvent(new Event('resize'));
-    }, 100);
-  }
-
-  // Cache initial English text into data-i18n-en attribute
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    if (!el.getAttribute('data-i18n-en')) {
-      el.setAttribute('data-i18n-en', el.innerHTML || el.value);
-    }
-  });
-
-  if (langEnBtn) {
-    langEnBtn.onclick = function() { setLanguage('en'); };
-  }
-  if (langArBtn) {
-    langArBtn.onclick = function() { setLanguage('ar'); };
-  }
-
-  // Apply saved language preference
-  if (currentLang === 'ar') {
-    setLanguage('ar');
-  }
 
   // Mobile sidebar toggle
   const sidebar = document.getElementById('sidebar');
@@ -902,19 +835,20 @@ function initAIoTApp() {
       }
       renderer.render(scene, camera);
     }
-    // Production Tasks Interactive Checklist State Sync
-    const idxChks = document.querySelectorAll('.idx-task-chk');
-    idxChks.forEach(chk => {
-      const key = 'idx_task_' + chk.getAttribute('data-chk');
-      if (localStorage.getItem(key) === 'true') {
-        chk.checked = true;
-      }
-      chk.addEventListener('change', () => {
-        localStorage.setItem(key, chk.checked);
-      });
-    });
+    animateW();
   })();
 
+  // Production Tasks Interactive Checklist State Sync
+  const idxChks = document.querySelectorAll('.idx-task-chk');
+  idxChks.forEach(chk => {
+    const key = 'idx_task_' + chk.getAttribute('data-chk');
+    if (localStorage.getItem(key) === 'true') {
+      chk.checked = true;
+    }
+    chk.addEventListener('change', () => {
+      localStorage.setItem(key, chk.checked);
+    });
+  });
 }
 
 // Immediate & ReadyState Fail-Proof Execution
